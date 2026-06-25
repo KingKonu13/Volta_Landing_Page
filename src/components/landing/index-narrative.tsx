@@ -299,7 +299,20 @@ export function IndexNarrative() {
   const railRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={railRef} style={{ backgroundColor: C.bg, color: C.ink }}>
+    <div ref={railRef} className="relative" style={{ backgroundColor: C.bg, color: C.ink }}>
+      {/* ambient pastel gradient — fixed so it stays soft behind the content */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `
+            radial-gradient(55rem 38rem at 88% -6%, rgba(255, 211, 165, 0.22), transparent 60%),
+            radial-gradient(52rem 40rem at 4% 94%, rgba(168, 199, 250, 0.20), transparent 58%),
+            radial-gradient(44rem 32rem at 74% 82%, rgba(255, 186, 199, 0.14), transparent 60%),
+            radial-gradient(40rem 30rem at 24% 12%, rgba(214, 232, 222, 0.16), transparent 60%)
+          `,
+        }}
+      />
       <a
         href="#intro"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:px-4 focus:py-2 focus:text-sm"
