@@ -7,6 +7,5 @@
       <stop offset="1" stop-color="#d6e8de"/>
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="7" fill="#14171b"/>
   <path d="M18.5 3 L8 17.5 H14.5 L13 29 L24 13.5 H17.5 Z" fill="url(#volt)"/>
 </svg>
