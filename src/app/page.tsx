@@ -1,35 +1,41 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Hero } from "@/components/sections/hero";
-import { VoltaWorkflow } from "@/components/sections/volta-workflow";
-import { Problem } from "@/components/sections/problem";
-import { Outputs } from "@/components/sections/outputs";
-import { TrustLayer } from "@/components/sections/trust-layer";
-import { AudienceBlocks } from "@/components/sections/audience-blocks";
-import { ExpertNetwork } from "@/components/sections/expert-network";
-import { FinalCta } from "@/components/sections/final-cta";
+import { Space_Grotesk, Spline_Sans, IBM_Plex_Mono } from "next/font/google";
+import { IndexNarrative } from "@/components/landing/index-narrative";
+
+const display = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--c2-display-font",
+  display: "swap",
+});
+
+const body = Spline_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--c2-body-font",
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--c2-mono-font",
+  display: "swap",
+});
 
 export default function Home() {
   return (
-    <>
-      <a
-        href="#top"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-[#1c1612] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[#f8f6f2]"
-      >
-        Skip to content
-      </a>
-      <Header />
-      <main>
-        <Hero />
-        <VoltaWorkflow />
-        <Problem />
-        <Outputs />
-        <TrustLayer />
-        <AudienceBlocks />
-        <ExpertNetwork />
-        <FinalCta />
-      </main>
-      <Footer />
-    </>
+    <div
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      style={
+        {
+          "--c2-display": "var(--c2-display-font)",
+          "--c2-mono": "var(--c2-mono-font)",
+          "--c2-surface": "#e9ebec",
+          fontFamily: "var(--c2-body-font)",
+        } as React.CSSProperties
+      }
+    >
+      <IndexNarrative />
+    </div>
   );
 }

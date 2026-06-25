@@ -1,6 +1,6 @@
 export const cta = {
-  primary: { label: "Schedule a scope call", href: "#sponsors" },
-  secondary: { label: "Join expert network", href: "#experts" },
+  primary: { label: "Schedule a call", href: "#sponsors" },
+  secondary: { label: "Join network", href: "#experts" },
 } as const;
 
 export const nav = [
@@ -10,14 +10,14 @@ export const nav = [
   { label: "Experts", href: "#expert-network" },
 ] as const;
 
-export const trustLine = "**AI drafts from your documents. Experts review.** Claims stay linked to supporting material.";
+export const trustLine = "**AI drafts from your documents. Experts review.** Claims stay linked to evidence.";
 
 export const hero = {
-  eyebrow: "AI-native Pre-IND meeting prep",
-  headline: "You do the science. Volta handles the filing work.",
-  sub: "Turn **source documents** into a **well-organized Pre-IND briefing package**. AI assembles the draft, domain experts review for accuracy, and your team keeps final approval before FDA use.",
-  badges: ["Fixed milestone scope", "Expert-reviewed", "Evidence-linked", "Secure intake"],
-  bullets: ["Secure data-room intake", "Domain expert review", "Evidence-linked review record"],
+  eyebrow: "AI-native Pre-IND prep",
+  headline: "You do the science. Volta handles the filing.",
+  sub: "Turn **source documents** into **Pre-IND briefing packages**. AI drafts, experts review, you approve before FDA use.",
+  badges: ["Fixed scope", "Expert-reviewed", "Evidence-linked", "Secure intake"],
+  bullets: ["Secure data-room intake", "Expert review", "Evidence-linked record"],
 } as const;
 
 export const workflow = [
@@ -29,80 +29,80 @@ export const workflow = [
 
 export const voltaWorkflow = {
   heading: "The Volta Workflow",
-  intro: "A four-step path from program documents to a reviewed Pre-IND briefing package.",
+  intro: "From program documents to a reviewed Pre-IND briefing package in four steps.",
   cards: [
     {
       step: "01",
       title: "Secure Data Room",
-      desc: "Upload **nonclinical, CMC, clinical, and program documents** into a structured workspace.",
+      desc: "Upload **nonclinical, CMC, clinical, and program documents** to a structured workspace.",
       tags: ["Encrypted intake", "Version control", "Access logs"],
     },
     {
       step: "02",
       title: "Agent-Assisted Drafting",
-      desc: "Volta drafts **Pre-IND sections** from your source material and links material claims to supporting documents.",
+      desc: "Volta drafts **Pre-IND sections** from source material and links claims to supporting documents.",
       tags: ["Draft sections", "Citation links", "Evidence linkage"],
     },
     {
       step: "03",
       title: "Expert Review",
-      desc: "**Regulatory, CMC, nonclinical, and clinical experts** review for scientific accuracy, regulatory logic, and open gaps before delivery.",
+      desc: "**Regulatory, CMC, nonclinical, and clinical experts** review for accuracy, logic, and gaps.",
       tags: ["Domain experts", "Structured review", "Gap review"],
     },
     {
       step: "04",
       title: "Meeting-Ready Package",
-      desc: "Receive a **Pre-IND briefing package** with source links, expert notes, and review history for sponsor approval.",
+      desc: "Receive a **Pre-IND briefing package** with source links, expert notes, and review history.",
       tags: ["Briefing package", "Review history", "Evidence links"],
     },
   ],
 } as const;
 
 export const problem = {
-  heading: "Regulatory work slows the science down.",
+  heading: "Regulatory work slows science.",
   intro:
-    "Pre-IND preparation is **manual, expensive, and easy to delay**. Volta gives sponsors a clearer path from source documents to meeting-prep materials.",
+    "Pre-IND preparation is **manual, expensive, and delayed**. Volta streamlines the path from source documents to meeting materials.",
   diagnosis: {
     label: "The hidden cost",
-    title: "The bottleneck is rarely the science alone. It is the handoff between evidence, narrative, and review.",
-    desc: "Teams lose momentum when source documents, regulatory language, expert edits, and sponsor approval all live in separate workstreams.",
+    title: "The bottleneck isn't science. It's the handoff between evidence, narrative, and review.",
+    desc: "Momentum stalls when source documents, regulatory language, expert edits, and sponsor approval live in separate workstreams.",
   },
   points: [
     {
       title: "Manual assembly",
-      desc: "Program teams turn **source documents** into organized regulatory narratives by hand.",
+      desc: "Program teams manually transform **source documents** into regulatory narratives.",
     },
     {
       title: "Scope creep",
-      desc: "Support can expand beyond the original **timeline, budget, and review scope**.",
+      desc: "Work expands beyond the original **timeline, budget, and scope**.",
     },
     {
       title: "Evidence gaps",
-      desc: "Unsupported claims create avoidable review friction and late-cycle rework.",
+      desc: "Unsupported claims cause review friction and late-cycle rework.",
     },
   ],
   resolution: {
     label: "What Volta changes",
-    title: "One connected path from source documents to reviewed meeting materials.",
+    title: "One path from source documents to reviewed meeting materials.",
     steps: [
       {
-        title: "Source documents stay organized",
-        desc: "Program files enter a structured workspace instead of another loose folder chain.",
+        title: "Source documents organized",
+        desc: "Program files enter a structured workspace, not another folder chain.",
       },
       {
-        title: "Drafting starts from evidence",
-        desc: "AI assembles sections with supporting sources attached to material claims.",
+        title: "Drafting from evidence",
+        desc: "AI assembles sections with sources attached to every claim.",
       },
       {
-        title: "Experts review the judgment",
-        desc: "Domain reviewers flag gaps, refine language, and support sponsor-ready revisions.",
+        title: "Experts review judgment",
+        desc: "Domain reviewers flag gaps, refine language, and approve revisions.",
       },
       {
-        title: "Sponsors approve the handoff",
-        desc: "Your team receives briefing materials, source links, and review notes for internal approval.",
+        title: "Sponsors approve handoff",
+        desc: "Your team receives briefing materials, source links, and review notes.",
       },
     ],
-    note: "The point is not to remove regulatory judgment. It is to remove the coordination drag around it.",
+    note: "We don't remove regulatory judgment. We remove the coordination drag around it.",
   },
 } as const;
 
@@ -132,65 +132,65 @@ export const howItWorks = {
 
 export const outputs = {
   heading: "What Volta delivers",
-  intro: "A complete, reviewed deliverable set for a **well-organized Pre-IND meeting package**.",
+  intro: "A complete, reviewed **Pre-IND meeting package** ready for sponsor review.",
   summary: {
     label: "Complete package",
     title: "Briefing materials, domain summaries, and traceability in one handoff.",
-    desc: "Volta turns your source documents into a **Pre-IND briefing package** with cited narratives, prioritized discussion questions, and expert review notes so your team can move into internal review with less ambiguity.",
+    desc: "Volta transforms source documents into a **Pre-IND briefing package** with cited narratives, prioritized questions, and expert review notes.",
     checks: ["Core briefing narrative", "Domain-specific summaries", "Source links and review notes"],
   },
   items: [
     {
       category: "Briefing package",
       title: "Pre-IND briefing book",
-      desc: "A **meeting-ready draft package** with program context, development rationale, sponsor questions, and evidence links for sponsor review.",
+      desc: "A **meeting-ready draft** with program context, development rationale, sponsor questions, and evidence links.",
       tags: ["Meeting package", "Sponsor review", "Evidence links"],
     },
     {
       category: "Evidence summaries",
       title: "Nonclinical study summary",
-      desc: "**Pharmacology, PK, and toxicology** synthesized from provided source studies, with assumptions and gaps called out for review.",
+      desc: "**Pharmacology, PK, and toxicology** synthesized from source studies, with assumptions and gaps called out.",
       tags: ["Pharmacology", "PK", "Toxicology"],
     },
     {
       category: "Evidence summaries",
       title: "CMC narrative",
-      desc: "Manufacturing and controls narrative addressing **drug substance, process, analytical controls, and open CMC questions** from available records.",
+      desc: "Manufacturing and controls narrative covering **drug substance, process, analytical controls, and open CMC questions**.",
       tags: ["Manufacturing", "Controls", "Source records"],
     },
     {
       category: "Development plan",
       title: "Clinical development plan",
-      desc: "**First-in-human trial rationale**, key design considerations, endpoints, and discussion points for FDA meeting preparation.",
+      desc: "**First-in-human trial rationale**, design considerations, endpoints, and discussion points for FDA meeting prep.",
       tags: ["FIH rationale", "Study design", "Endpoints"],
     },
     {
       category: "Meeting prep",
       title: "Anticipated FDA questions",
-      desc: "Prioritized questions and background context organized by **domain, risk, and decision need** for the Pre-IND discussion.",
+      desc: "Prioritized questions organized by **domain, risk, and decision need** for Pre-IND discussion.",
       tags: ["Agency questions", "Priorities", "Risk areas"],
     },
     {
       category: "Traceability",
       title: "Review record",
-      desc: "Source links, reviewer notes, and revision history captured so **claims, gaps, and decisions** remain easy to audit.",
+      desc: "Source links, reviewer notes, and revision history so **claims, gaps, and decisions** stay auditable.",
       tags: ["Source links", "Review notes", "Revision history"],
     },
   ],
   completion: {
     title: "Built for sponsor approval before agency use.",
-    desc: "The package is delivered with source links and expert notes; sponsors resolve open gaps and retain final responsibility for any material shared with FDA.",
+    desc: "Delivered with source links and expert notes; sponsors resolve gaps and retain final responsibility for FDA material.",
   },
 } as const;
 
 export const trust = {
-  heading: "Built for regulated work.",
+  heading: "Built for regulation.",
   sub: trustLine,
-  body: "Volta keeps the package anchored to source documents, domain review, and sponsor approval — so AI speeds up assembly without becoming the decision-maker.",
+  body: "Volta anchors work to source documents, domain review, and sponsor approval. AI assists, never decides.",
   pillars: [
-    { title: "Evidence-linked claims", desc: "Material statements stay connected to **supporting source documents** for sponsor review." },
-    { title: "Domain review", desc: "Experts review for **scientific accuracy, regulatory logic, and open gaps** before delivery." },
-    { title: "Milestone scope", desc: "**Fixed scope. Fixed milestone.** Review needs and boundaries are defined upfront." },
+    { title: "Evidence-linked", desc: "Claims stay connected to **supporting source documents** for sponsor review." },
+    { title: "Expert review", desc: "Experts validate **scientific accuracy, regulatory logic, and gaps** before delivery." },
+    { title: "Fixed scope", desc: "**Fixed scope. Fixed milestone.** Boundaries defined upfront." },
   ],
 } as const;
 
@@ -218,10 +218,10 @@ export const audiences = {
 } as const;
 
 export const expertNetwork = {
-  heading: "Experts where the package needs them.",
+  heading: "Experts where you need them.",
   intro:
-    "Volta routes sections to reviewers with **direct regulatory or technical experience** in the relevant domain. The system assembles and cites; experts review the draft, flag gaps, and support sponsor-ready revisions.",
-  domains: ["Regulatory affairs", "Nonclinical & toxicology", "CMC / manufacturing", "Clinical development", "Pharmacology / PK", "Biostatistics"],
+    "Volta routes sections to reviewers with **direct domain experience**. Experts review drafts, flag gaps, and deliver sponsor-ready revisions.",
+  domains: ["Regulatory", "Nonclinical", "CMC", "Clinical", "Pharmacology / PK", "Biostatistics"],
   stats: [
     { value: "Regulatory", label: "strategy" },
     { value: "CMC", label: "manufacturing" },
@@ -230,6 +230,6 @@ export const expertNetwork = {
 } as const;
 
 export const finalCta = {
-  heading: "Start with your next filing milestone.",
-  sub: "**Fixed scope.** Domain review. **Evidence-linked delivery.** Start with a short scoping conversation and leave with clearer next steps.",
+  heading: "Start your next filing.",
+  sub: "**Fixed scope.** Domain review. **Evidence-linked delivery.** A scoping call delivers clear next steps.",
 } as const;

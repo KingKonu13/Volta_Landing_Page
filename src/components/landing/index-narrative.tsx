@@ -208,6 +208,89 @@ function Tag({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ----------------------------------- form ----------------------------------- */
+
+function CaptureForm({
+  type,
+  dark = false,
+}: {
+  type: "experts" | "sponsors";
+  dark?: boolean;
+}) {
+  const [data, setData] = useState({ name: "", email: "" });
+  const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, name: data.name, email: data.email }),
+      });
+      if (res.ok) {
+        setStatus("done");
+        setData({ name: "", email: "" });
+      } else {
+        setStatus("idle");
+      }
+    } catch {
+      setStatus("idle");
+    }
+  };
+
+  const fg = dark ? C.bg : C.ink;
+  const mutedFg = dark ? "#aeb4bb" : C.muted;
+  const fieldBg = dark ? "rgba(255,255,255,0.06)" : C.bg;
+  const fieldLine = dark ? "#3a4047" : C.line;
+  const btnBg = dark ? C.bg : C.ink;
+  const btnFg = dark ? C.ink : C.bg;
+
+  if (status === "done") {
+    return (
+      <p className="text-[15px] leading-[1.6]" style={{ color: mutedFg }}>
+        Thanks — we&apos;ll reach out to you shortly.
+      </p>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="flex w-full max-w-[420px] flex-col gap-3">
+      <input
+        type="text"
+        required
+        placeholder="Full name"
+        value={data.name}
+        onChange={(e) => setData({ ...data, name: e.target.value })}
+        className="w-full rounded-full border px-5 py-3 text-[14px] outline-none transition-colors focus:border-current"
+        style={{ backgroundColor: fieldBg, borderColor: fieldLine, color: fg }}
+      />
+      <input
+        type="email"
+        required
+        placeholder="Work email"
+        value={data.email}
+        onChange={(e) => setData({ ...data, email: e.target.value })}
+        className="w-full rounded-full border px-5 py-3 text-[14px] outline-none transition-colors focus:border-current"
+        style={{ backgroundColor: fieldBg, borderColor: fieldLine, color: fg }}
+      />
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-medium transition-opacity hover:opacity-90 disabled:opacity-60"
+        style={{ backgroundColor: btnBg, color: btnFg }}
+      >
+        {status === "submitting"
+          ? "Sending…"
+          : type === "experts"
+            ? "Join the expert network"
+            : "Request a scope call"}
+      </button>
+    </form>
+  );
+}
+
 /* ----------------------------------- page ----------------------------------- */
 
 export function IndexNarrative() {
@@ -271,7 +354,7 @@ export function IndexNarrative() {
                   {cta.primary.label}
                 </Link>
                 <Link
-                  href={cta.secondary.href}
+                  href="#expert-network"
                   className="inline-flex items-center rounded-full border px-6 py-3 text-[14px] font-medium transition-colors hover:bg-[var(--c2-surface)]"
                   style={{ borderColor: C.line, color: C.ink }}
                 >
@@ -635,14 +718,18 @@ export function IndexNarrative() {
             </div>
 
             <Reveal delay={0.08}>
-              <Link
-                href={cta.secondary.href}
-                className="mt-10 inline-flex items-center gap-2 rounded-full border px-6 py-3 text-[14px] font-medium transition-colors hover:bg-[var(--c2-surface)]"
-                style={{ borderColor: C.line, color: C.ink }}
-              >
-                {cta.secondary.label}
-                <span aria-hidden style={{ color: C.accent }}>→</span>
-              </Link>
+              <div className="mt-12 max-w-[480px]">
+                <p
+                  className="text-[10px] font-medium uppercase tracking-[0.3em]"
+                  style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
+                >
+                  Apply to review
+                </p>
+                <p className="mt-3 mb-5 text-[15px] leading-[1.6]" style={{ color: C.muted }}>
+                  Share your name and email and we&apos;ll reach out about matching review work to your domain.
+                </p>
+                <CaptureForm type="experts" />
+              </div>
             </Reveal>
           </section>
 
@@ -670,21 +757,8 @@ export function IndexNarrative() {
                 >
                   {renderEmphasis(finalCta.sub)}
                 </p>
-                <div className="mt-10 flex flex-wrap justify-center gap-3">
-                  <Link
-                    href={cta.primary.href}
-                    className="inline-flex items-center rounded-full px-7 py-3.5 text-[14px] font-medium transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: C.bg, color: C.ink }}
-                  >
-                    {cta.primary.label}
-                  </Link>
-                  <Link
-                    href={cta.secondary.href}
-                    className="inline-flex items-center rounded-full border px-7 py-3.5 text-[14px] font-medium transition-colors hover:bg-white/5"
-                    style={{ borderColor: "#3a4047", color: C.bg }}
-                  >
-                    {cta.secondary.label}
-                  </Link>
+                <div className="mt-10 flex justify-center">
+                  <CaptureForm type="sponsors" dark />
                 </div>
               </div>
             </Reveal>
