@@ -21,7 +21,7 @@ const siteUrl = "https://voltafile.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Volta — You do the science. Volta handles the filing work.",
+  title: "Volta — You do the science. Volta handles the rest.",
   description:
     "Volta turns source documents into an expert-reviewed Pre-IND briefing package with milestone-based pricing.",
   keywords: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "expert review",
   ],
   openGraph: {
-    title: "Volta — You do the science. Volta handles the filing work.",
+    title: "Volta — You do the science. Volta handles the rest.",
     description:
       "AI drafts from your documents. Experts review. Claims stay linked to supporting material.",
     url: siteUrl,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Volta — You do the science. Volta handles the filing work.",
+    title: "Volta — You do the science. Volta handles the rest.",
     description:
       "AI drafts from your documents. Experts review. Claims stay linked to supporting material.",
   },
