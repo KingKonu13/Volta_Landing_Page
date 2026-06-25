@@ -13,6 +13,7 @@ interface Submission {
   type: 'experts' | 'sponsors';
   name: string;
   email: string;
+  phone?: string;
   timestamp: string;
 }
 
@@ -63,6 +64,7 @@ async function emailSubmission(submission: Submission): Promise<void> {
           `Type:  ${audience}`,
           `Name:  ${submission.name}`,
           `Email: ${submission.email}`,
+          ...(submission.phone ? [`Phone: ${submission.phone}`] : []),
           `Time:  ${submission.timestamp}`,
         ].join('\n'),
       }),
@@ -78,7 +80,7 @@ async function emailSubmission(submission: Submission): Promise<void> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { type, name, email } = body;
+    const { type, name, email, phone } = body;
 
     if (!type || !name || !email) {
       return NextResponse.json(
@@ -99,6 +101,7 @@ export async function POST(request: NextRequest) {
       type,
       name,
       email,
+      ...(phone ? { phone: String(phone) } : {}),
       timestamp: new Date().toISOString(),
     };
 

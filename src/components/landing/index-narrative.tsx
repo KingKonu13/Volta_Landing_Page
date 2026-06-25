@@ -9,12 +9,12 @@ import {
   trustLine,
   voltaWorkflow,
   problem,
-  outputs,
   trust,
   expertNetwork,
   finalCta,
 } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
+import { OutputsSection } from "@/components/landing/outputs-section";
 
 /* ------------------------------------------------------------------ *
  * Palette (cool neutral / charcoal)
@@ -262,8 +262,9 @@ function CaptureForm({
   type: "experts" | "sponsors";
   dark?: boolean;
 }) {
-  const [data, setData] = useState({ name: "", email: "" });
+  const [data, setData] = useState({ name: "", email: "", phone: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
+  const showPhone = type === "sponsors";
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -272,11 +273,16 @@ function CaptureForm({
       const res = await fetch("/api/submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, name: data.name, email: data.email }),
+        body: JSON.stringify({
+          type,
+          name: data.name,
+          email: data.email,
+          phone: showPhone ? data.phone : undefined,
+        }),
       });
       if (res.ok) {
         setStatus("done");
-        setData({ name: "", email: "" });
+        setData({ name: "", email: "", phone: "" });
       } else {
         setStatus("idle");
       }
@@ -314,12 +320,22 @@ function CaptureForm({
       <input
         type="email"
         required
-        placeholder="Work email"
+        placeholder="Email"
         value={data.email}
         onChange={(e) => setData({ ...data, email: e.target.value })}
         className="w-full rounded-full border px-5 py-3 text-[14px] outline-none transition-colors focus:border-current"
         style={{ backgroundColor: fieldBg, borderColor: fieldLine, color: fg }}
       />
+      {showPhone && (
+        <input
+          type="tel"
+          placeholder="Phone number"
+          value={data.phone}
+          onChange={(e) => setData({ ...data, phone: e.target.value })}
+          className="w-full rounded-full border px-5 py-3 text-[14px] outline-none transition-colors focus:border-current"
+          style={{ backgroundColor: fieldBg, borderColor: fieldLine, color: fg }}
+        />
+      )}
       <button
         type="submit"
         disabled={status === "submitting"}
@@ -610,106 +626,7 @@ export function IndexNarrative({
           {/* ============================ 03 — OUTPUTS ========================== */}
           <section id="outputs" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="03" kicker="What you receive" />
-            <Reveal>
-              <h2
-                className="text-[clamp(30px,3.6vw,46px)] leading-[1.05] tracking-[-0.025em]"
-                style={{ fontFamily: "var(--c2-display)", color: C.ink }}
-              >
-                {outputs.heading}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <p className="mt-6 max-w-[56ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
-                {renderEmphasis(outputs.intro)}
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div
-                className="mt-12 rounded-2xl border p-7"
-                style={{ borderColor: C.line, backgroundColor: C.surface }}
-              >
-                <p
-                  className="text-[10px] font-medium uppercase tracking-[0.3em]"
-                  style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
-                >
-                  {outputs.summary.label}
-                </p>
-                <p
-                  className="mt-4 max-w-[40ch] text-[22px] leading-[1.25] tracking-[-0.015em]"
-                  style={{ fontFamily: "var(--c2-display)", color: C.ink }}
-                >
-                  {outputs.summary.title}
-                </p>
-                <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.6]" style={{ color: C.muted }}>
-                  {renderEmphasis(outputs.summary.desc)}
-                </p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {outputs.summary.checks.map((c) => (
-                    <Tag key={c}>{c}</Tag>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2" style={{ borderColor: C.line, backgroundColor: C.line }}>
-              {outputs.items.map((item, i) => (
-                <div key={item.title} style={{ backgroundColor: C.bg }}>
-                  <Reveal delay={(i % 2) * 0.05} className="h-full p-6">
-                    <p
-                      className="text-[10px] font-medium uppercase tracking-[0.24em]"
-                      style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
-                    >
-                      {item.category}
-                    </p>
-                    <h3 className="mt-3 text-[17px] font-medium tracking-[-0.01em]" style={{ color: C.ink }}>
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-[14px] leading-[1.55]" style={{ color: C.muted }}>
-                      {renderEmphasis(item.desc)}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {item.tags.map((t) => (
-                        <Tag key={t}>{t}</Tag>
-                      ))}
-                    </div>
-                  </Reveal>
-                </div>
-              ))}
-            </div>
-
-            <Reveal delay={0.08}>
-              <div className="mt-8 rounded-2xl px-7 py-8 sm:px-8" style={{ backgroundColor: C.ink }}>
-                <p
-                  className="text-[10px] font-medium uppercase tracking-[0.3em]"
-                  style={{ fontFamily: "var(--c2-mono)", color: "#aeb4bb" }}
-                >
-                  {outputs.pricing.label}
-                </p>
-                <p
-                  className="mt-4 max-w-[28ch] text-[22px] leading-[1.2] tracking-[-0.015em]"
-                  style={{ fontFamily: "var(--c2-display)", color: C.bg }}
-                >
-                  {outputs.pricing.title}
-                </p>
-                <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.6]" style={{ color: "#c7ccd2" }}>
-                  {renderEmphasis(outputs.pricing.desc)}
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.08}>
-              <div className="mt-8 flex gap-4 border-l-2 pl-5" style={{ borderColor: C.accent }}>
-                <div>
-                  <h3 className="text-[16px] font-medium" style={{ color: C.ink }}>
-                    {outputs.completion.title}
-                  </h3>
-                  <p className="mt-2 max-w-[60ch] text-[14px] leading-[1.6]" style={{ color: C.muted }}>
-                    {outputs.completion.desc}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+            <OutputsSection />
           </section>
 
           {/* ============================= 04 — TRUST ========================== */}
