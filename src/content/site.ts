@@ -16,7 +16,7 @@ export const hero = {
   eyebrow: "AI-native Pre-IND prep",
   headline: "You do the science. Volta handles the rest.",
   sub: "Turn **source documents** into **Pre-IND briefing packages**. Our AI platform drafts, experts review, you approve before FDA use.",
-  badges: ["Fixed scope", "Expert-reviewed", "Evidence-linked", "Secure intake"],
+  badges: ["Milestone-based pricing", "Expert-reviewed", "Evidence-linked", "Secure intake"],
   bullets: ["Secure data-room intake", "Expert review", "Evidence-linked record"],
 } as const;
 
@@ -113,7 +113,7 @@ export const howItWorks = {
   steps: [
     {
       title: "Scope the milestone",
-      desc: "We define the filing deliverable, source documents, review needs, and fixed milestone price before work starts.",
+      desc: "We define the filing deliverable, source documents, and review needs upfront. Pricing is milestone-based — you only get billed on delivery.",
     },
     {
       title: "Build from your data room",
@@ -181,6 +181,11 @@ export const outputs = {
     title: "Built for sponsor approval before agency use.",
     desc: "Delivered with source links and expert notes; sponsors resolve gaps and retain final responsibility for FDA material.",
   },
+  pricing: {
+    label: "Pricing",
+    title: "Milestone-based pricing. No hourly billing.",
+    desc: "**No deliverable, no bill.** You pay against completed milestones, not hours — so incentives are aligned, costs are predictable, and we carry the execution risk.",
+  },
 } as const;
 
 export const trust = {
@@ -190,7 +195,7 @@ export const trust = {
   pillars: [
     { title: "Evidence-linked", desc: "Claims stay connected to **supporting source documents** for sponsor review." },
     { title: "Expert review", desc: "Experts validate **scientific accuracy, regulatory logic, and gaps** before delivery." },
-    { title: "Fixed scope", desc: "**Fixed scope. Fixed milestone.** Boundaries defined upfront." },
+    { title: "Milestone-based pricing", desc: "**You only get a bill if we deliver.** No hourly billing — you pay when defined deliverables are done." },
   ],
 } as const;
 
@@ -200,7 +205,7 @@ export const audiences = {
     heading: "Move toward the FDA meeting with less drag.",
     desc: "Volta helps teams move from **data room** to **Pre-IND briefing package** without open-ended consulting cycles.",
     bullets: [
-      "Fixed pricing **by milestone**",
+      "Milestone-based pricing — **pay on delivery**",
       "Domain-reviewed **deliverables**",
       "Evidence-linked **claims**",
     ],
@@ -231,5 +236,5 @@ export const expertNetwork = {
 
 export const finalCta = {
   heading: "Start your next filing.",
-  sub: "**Fixed scope.** Domain review. **Evidence-linked delivery.** A scoping call delivers clear next steps.",
+  sub: "**Milestone-based pricing — you only get a bill if we deliver.** Domain review. **Evidence-linked delivery.** A scoping call delivers clear next steps.",
 } as const;

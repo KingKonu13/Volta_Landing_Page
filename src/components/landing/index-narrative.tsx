@@ -679,6 +679,26 @@ export function IndexNarrative({
             </div>
 
             <Reveal delay={0.08}>
+              <div className="mt-8 rounded-2xl px-7 py-8 sm:px-8" style={{ backgroundColor: C.ink }}>
+                <p
+                  className="text-[10px] font-medium uppercase tracking-[0.3em]"
+                  style={{ fontFamily: "var(--c2-mono)", color: "#aeb4bb" }}
+                >
+                  {outputs.pricing.label}
+                </p>
+                <p
+                  className="mt-4 max-w-[28ch] text-[22px] leading-[1.2] tracking-[-0.015em]"
+                  style={{ fontFamily: "var(--c2-display)", color: C.bg }}
+                >
+                  {outputs.pricing.title}
+                </p>
+                <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.6]" style={{ color: "#c7ccd2" }}>
+                  {renderEmphasis(outputs.pricing.desc)}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08}>
               <div className="mt-8 flex gap-4 border-l-2 pl-5" style={{ borderColor: C.accent }}>
                 <div>
                   <h3 className="text-[16px] font-medium" style={{ color: C.ink }}>

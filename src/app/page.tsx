@@ -35,7 +35,7 @@ export default function Home() {
         } as React.CSSProperties
       }
     >
-      <IndexNarrative />
+      <IndexNarrative gradientStrength={2.6} />
     </div>
   );
 }

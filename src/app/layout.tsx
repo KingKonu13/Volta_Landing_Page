@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Volta — You do the science. Volta handles the filing work.",
   description:
-    "Volta turns source documents into an expert-reviewed Pre-IND briefing package with fixed milestone scope.",
+    "Volta turns source documents into an expert-reviewed Pre-IND briefing package with milestone-based pricing.",
   keywords: [
     "Pre-IND",
     "IND",
