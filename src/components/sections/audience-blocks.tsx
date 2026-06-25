@@ -30,8 +30,8 @@ function AudienceCard({
       id={id}
       className={
         inverted
-          ? "scroll-mt-24 rounded-[24px] bg-[#1c1612] p-7 text-[#f8f6f2] sm:p-9 lg:p-10"
-          : "scroll-mt-24 rounded-[24px] border border-[#1c1612]/12 bg-[#f0ece4] p-7 text-[#1c1612] sm:p-9 lg:p-10"
+          ? "scroll-mt-24 flex h-full flex-col rounded-[24px] bg-[#1c1612] p-7 text-[#f8f6f2] sm:p-9 lg:p-10"
+          : "scroll-mt-24 flex h-full flex-col rounded-[24px] border border-[#1c1612]/12 bg-[#f0ece4] p-7 text-[#1c1612] sm:p-9 lg:p-10"
       }
     >
       <p className={inverted ? "font-mono text-[10px] uppercase tracking-[0.18em] text-[#ddd2c0]" : "font-mono text-[10px] uppercase tracking-[0.18em] text-[#6c5e4e]"}>
@@ -53,7 +53,7 @@ function AudienceCard({
         ))}
       </ul>
 
-      <div className="mt-8">
+      <div className="mt-auto pt-8">
         {showForm ? (
           <ContactForm type={id as "experts" | "sponsors"} inverted={inverted} />
         ) : (
@@ -74,7 +74,7 @@ function AudienceCard({
 export function AudienceBlocks() {
   return (
     <Section tone="light">
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 items-stretch">
         <Reveal>
           <AudienceCard
             id="sponsors"

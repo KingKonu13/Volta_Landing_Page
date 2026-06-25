@@ -18,12 +18,30 @@ export function ContactForm({ type, inverted = false, className }: ContactFormPr
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type,
+          name: formData.name,
+          email: formData.email,
+        }),
+      });
 
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "" });
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "" });
+      } else {
+        console.error('Submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
