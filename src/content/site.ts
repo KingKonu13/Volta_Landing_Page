@@ -10,12 +10,12 @@ export const nav = [
   { label: "Experts", href: "#expert-network" },
 ] as const;
 
-export const trustLine = "**AI drafts from your documents. Experts review.** Claims stay linked to evidence.";
+export const trustLine = "**Our AI platform drafts from your documents. Experts review.** Claims stay linked to evidence.";
 
 export const hero = {
   eyebrow: "AI-native Pre-IND prep",
-  headline: "You do the science. Volta handles the filing.",
-  sub: "Turn **source documents** into **Pre-IND briefing packages**. AI drafts, experts review, you approve before FDA use.",
+  headline: "You do the science. Volta handles the rest.",
+  sub: "Turn **source documents** into **Pre-IND briefing packages**. Our AI platform drafts, experts review, you approve before FDA use.",
   badges: ["Fixed scope", "Expert-reviewed", "Evidence-linked", "Secure intake"],
   bullets: ["Secure data-room intake", "Expert review", "Evidence-linked record"],
 } as const;
@@ -91,7 +91,7 @@ export const problem = {
       },
       {
         title: "Drafting from evidence",
-        desc: "AI assembles sections with sources attached to every claim.",
+        desc: "Our AI platform assembles sections with sources attached to every claim.",
       },
       {
         title: "Experts review judgment",
@@ -109,7 +109,7 @@ export const problem = {
 export const howItWorks = {
   heading: "How Volta works",
   intro:
-    "AI accelerates assembly. Experts review for accuracy. Sponsors retain final regulatory responsibility and approval.",
+    "Our AI platform accelerates assembly. Experts review for accuracy. Sponsors retain final regulatory responsibility and approval.",
   steps: [
     {
       title: "Scope the milestone",
@@ -186,7 +186,7 @@ export const outputs = {
 export const trust = {
   heading: "Built for regulation.",
   sub: trustLine,
-  body: "Volta anchors work to source documents, domain review, and sponsor approval. AI assists, never decides.",
+  body: "Volta anchors work to source documents, domain review, and sponsor approval. Our AI platform assists, never decides.",
   pillars: [
     { title: "Evidence-linked", desc: "Claims stay connected to **supporting source documents** for sponsor review." },
     { title: "Expert review", desc: "Experts validate **scientific accuracy, regulatory logic, and gaps** before delivery." },
@@ -211,7 +211,7 @@ export const audiences = {
     desc: "Join a network of regulatory, nonclinical, CMC, and clinical experts reviewing **AI-assembled drafts** in paid, scoped engagements.",
     bullets: [
       "Assignments matched to **your expertise**",
-      "AI handles **assembly and citation**",
+      "Our AI platform handles **assembly and citation**",
       "Clear **scope and turnaround**",
     ],
   },
