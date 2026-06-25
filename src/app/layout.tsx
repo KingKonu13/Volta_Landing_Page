@@ -17,7 +17,7 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
-const siteUrl = "https://voltafile.ai";
+const siteUrl = "https://voltafile.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
