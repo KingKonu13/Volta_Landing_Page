@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight, Check, FileText, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { hero, cta, trustLine } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -80,12 +80,12 @@ export function Hero() {
       <div className="container-page relative pb-24">
         <header className="grid grid-cols-1 items-start gap-y-10 py-12 lg:grid-cols-2 lg:gap-x-[58px] lg:py-[67px]">
           <Reveal>
-            <div>
+            <div className="flex h-full flex-col">
               <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-[#6c5e4e]">
                 {hero.eyebrow}
               </span>
               <h1 className="text-display mt-5 max-w-[680px] py-3 text-[#1c1612]">
-                {hero.headline}
+                <RevealText>{hero.headline}</RevealText>
               </h1>
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {hero.badges.map((badge) => (
@@ -94,6 +94,16 @@ export function Hero() {
                   </span>
                 ))}
               </div>
+              <Reveal delay={0.18}>
+                <ul className="mt-10 grid gap-3 border-t border-[#1c1612]/12 pt-8 lg:mt-auto">
+                  {hero.bullets.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-[14px] leading-[1.5] tracking-[-0.005em] text-[#3b3128]">
+                      <span className="mt-1.5 inline-flex h-px w-6 shrink-0 bg-[#0a7795]/70" aria-hidden />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
           </Reveal>
 
@@ -110,24 +120,19 @@ export function Hero() {
                   {cta.secondary.label}
                 </Button>
               </div>
-              <HeroFilingVisual />
+              <Reveal delay={0.12}>
+                <HeroFilingVisual />
+              </Reveal>
             </div>
           </Reveal>
         </header>
 
         <Reveal delay={0.14}>
           <div className="border-y border-[#1c1612]/12 py-5">
-            <div className="flex flex-col gap-5 text-[13px] leading-[1.5] text-[#3b3128]/75 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-md">{renderEmphasis(trustLine)}</p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {hero.bullets.map((item) => (
-                  <span key={item} className="inline-flex items-center gap-1.5">
-                    <ArrowUpRight size={13} className="text-[#0a7795]/80" aria-hidden />
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <p className="flex items-center gap-2.5 text-[13px] leading-[1.5] text-[#3b3128]/75">
+              <ArrowUpRight size={14} className="shrink-0 text-[#0a7795]/80" aria-hidden />
+              <span>{renderEmphasis(trustLine)}</span>
+            </p>
           </div>
         </Reveal>
       </div>
