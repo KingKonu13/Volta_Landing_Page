@@ -26,7 +26,7 @@ async function getSubmissions(): Promise<Submission[]> {
 }
 
 async function saveSubmission(submission: Submission): Promise<void> {
-  // Always log so the lead is captured even if the filesystem write fails.
+  // Always log so the lead is captured even if other sinks fail.
   console.log('[submission]', JSON.stringify(submission));
   try {
     const submissions = await getSubmissions();
@@ -34,6 +34,44 @@ async function saveSubmission(submission: Submission): Promise<void> {
     await fs.writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2));
   } catch (err) {
     console.error('Could not persist submission to disk:', err);
+  }
+}
+
+// Durable lead capture: email the submission via Resend if configured.
+// Set RESEND_API_KEY and LEADS_EMAIL in the environment to enable.
+async function emailSubmission(submission: Submission): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.LEADS_EMAIL;
+  if (!apiKey || !to) return; // not configured — silently skip
+
+  const from = process.env.LEADS_FROM ?? 'Volta Leads <onboarding@resend.dev>';
+  const audience = submission.type === 'experts' ? 'Expert network' : 'Sponsor';
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: submission.email,
+        subject: `New ${audience} lead — ${submission.name}`,
+        text: [
+          `Type:  ${audience}`,
+          `Name:  ${submission.name}`,
+          `Email: ${submission.email}`,
+          `Time:  ${submission.timestamp}`,
+        ].join('\n'),
+      }),
+    });
+    if (!res.ok) {
+      console.error('Resend email failed:', res.status, await res.text());
+    }
+  } catch (err) {
+    console.error('Could not send lead email:', err);
   }
 }
 
@@ -65,6 +103,7 @@ export async function POST(request: NextRequest) {
     };
 
     await saveSubmission(submission);
+    await emailSubmission(submission);
 
     return NextResponse.json(
       { success: true, message: 'Submission received' },
