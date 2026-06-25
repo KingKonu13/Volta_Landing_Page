@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { RevealGroup, RevealItem, RevealText } from "@/components/ui/reveal";
 import { problem } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export function Problem() {
               {problem.diagnosis.label}
             </p>
             <h3 className="mt-5 font-display text-[34px] leading-[1.04] tracking-[-0.022em] text-[#1c1612] sm:text-[42px]">
-              {problem.diagnosis.title}
+              <RevealText>{problem.diagnosis.title}</RevealText>
             </h3>
           </div>
           <p className="max-w-2xl text-[17px] leading-[1.55] tracking-[-0.002em] text-[#3b3128] sm:text-[18px]">
@@ -42,7 +42,7 @@ export function Problem() {
                   </span>
                   <div>
                     <h3 className="font-display text-[28px] leading-[1.12] tracking-[-0.018em] text-[#1c1612] sm:text-[32px]">
-                      {p.title}
+                      <RevealText>{p.title}</RevealText>
                     </h3>
                     <p className="mt-3 max-w-xl text-[15px] leading-[1.55] tracking-[-0.002em] text-[#3b3128]">
                       {renderEmphasis(p.desc)}
@@ -59,7 +59,7 @@ export function Problem() {
                 {problem.resolution.label}
               </p>
               <h3 className="mt-5 max-w-xl font-display text-[32px] leading-[1.06] tracking-[-0.02em] text-[#1c1612] sm:text-[38px]">
-                {problem.resolution.title}
+                <RevealText>{problem.resolution.title}</RevealText>
               </h3>
 
               <div className="mt-8 grid gap-px border border-[#1c1612]/10 bg-[#1c1612]/10">
@@ -68,7 +68,7 @@ export function Problem() {
                     <ArrowRight size={15} strokeWidth={1.25} className="mt-1 text-[#0a7795]" aria-hidden />
                     <div>
                       <h4 className="font-display text-[22px] leading-[1.12] tracking-[-0.014em] text-[#1c1612]">
-                        {step.title}
+                        <RevealText>{step.title}</RevealText>
                       </h4>
                       <p className="mt-2 text-[13px] leading-[1.5] text-[#3b3128]">
                         {step.desc}

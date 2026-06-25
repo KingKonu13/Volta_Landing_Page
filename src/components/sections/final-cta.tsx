@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { finalCta, cta } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -14,7 +14,7 @@ export function FinalCta() {
                 Next milestone
               </span>
               <h2 id="final-cta-heading" className="text-display-sm mx-auto mt-4 max-w-3xl text-[#1c1612]">
-                {finalCta.heading}
+                <RevealText>{finalCta.heading}</RevealText>
               </h2>
             </div>
           </Reveal>

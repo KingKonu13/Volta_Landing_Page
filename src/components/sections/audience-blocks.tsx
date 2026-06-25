@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { ContactForm } from "@/components/ui/contact-form";
 import { audiences, cta } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
@@ -30,15 +30,15 @@ function AudienceCard({
       id={id}
       className={
         inverted
-          ? "scroll-mt-24 flex h-full flex-col rounded-[24px] bg-[#1c1612] p-7 text-[#f8f6f2] sm:p-9 lg:p-10"
-          : "scroll-mt-24 flex h-full flex-col rounded-[24px] border border-[#1c1612]/12 bg-[#f0ece4] p-7 text-[#1c1612] sm:p-9 lg:p-10"
+          ? "scroll-mt-24 flex min-h-[520px] flex-col rounded-[24px] bg-[#1c1612] p-7 text-[#f8f6f2] sm:p-9 lg:p-10"
+          : "scroll-mt-24 flex min-h-[520px] flex-col rounded-[24px] border border-[#1c1612]/12 bg-[#f0ece4] p-7 text-[#1c1612] sm:p-9 lg:p-10"
       }
     >
       <p className={inverted ? "font-mono text-[10px] uppercase tracking-[0.18em] text-[#ddd2c0]" : "font-mono text-[10px] uppercase tracking-[0.18em] text-[#6c5e4e]"}>
         {eyebrow}
       </p>
       <h3 className="text-display-sm mt-5 max-w-xl">
-        {heading}
+        <RevealText>{heading}</RevealText>
       </h3>
       <p className={inverted ? "mt-6 max-w-xl text-[15px] leading-[1.55] text-[#f8f6f2]/68" : "mt-6 max-w-xl text-[15px] leading-[1.55] text-[#3b3128]"}>
         {renderEmphasis(desc)}

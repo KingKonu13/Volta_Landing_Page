@@ -1,5 +1,5 @@
 import { cn, renderEmphasis } from "@/lib/utils";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 
 export function Section({
   id,
@@ -64,7 +64,7 @@ export function SectionHeading({
         id={id}
         className={`text-display-sm mt-4 max-w-4xl ${align === "center" ? "mx-auto" : ""} ${tone === "dark" ? "text-[#f8f6f2]" : "text-[#1c1612]"}`}
       >
-        {title}
+        <RevealText>{title}</RevealText>
       </h2>
       {intro && (
         <p

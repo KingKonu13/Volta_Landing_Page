@@ -44,9 +44,11 @@ export function Reveal({
 export function RevealGroup({
   children,
   className,
+  staggerDelay = 0.08,
 }: {
   children: React.ReactNode;
   className?: string;
+  staggerDelay?: number;
 }) {
   return (
     <motion.div
@@ -56,7 +58,7 @@ export function RevealGroup({
       viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.08 } },
+        show: { transition: { staggerChildren: staggerDelay } },
       }}
     >
       {children}
@@ -85,5 +87,63 @@ export function RevealItem({
     >
       {children}
     </MotionTag>
+  );
+}
+
+export function RevealText({
+  children,
+  className,
+  delay = 0,
+  wordDelay = 0.06,
+}: {
+  children: string;
+  className?: string;
+  delay?: number;
+  wordDelay?: number;
+}) {
+  const reduce = useReducedMotion();
+  
+  if (reduce) {
+    return <span className={cn(className)}>{children}</span>;
+  }
+
+  const words = children.split(" ");
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: wordDelay, delayChildren: delay },
+    },
+  };
+
+  const childVariants: Variants = {
+    hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.5, ease },
+    },
+  };
+
+  return (
+    <motion.span
+      className={cn("inline-block", className)}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          className="inline-block mr-[0.25em]"
+          variants={childVariants}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.span>
   );
 }

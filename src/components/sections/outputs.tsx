@@ -7,7 +7,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { Reveal, RevealGroup, RevealItem, RevealText } from "@/components/ui/reveal";
 import { outputs } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -45,7 +45,7 @@ export function Outputs() {
               {outputs.summary.label}
             </p>
             <h3 className="mt-4 font-display text-[32px] leading-[1.08] tracking-[-0.02em] text-[#1c1612] sm:text-[38px]">
-              {outputs.summary.title}
+              <RevealText>{outputs.summary.title}</RevealText>
             </h3>
             <p className="mt-5 max-w-2xl text-[15px] leading-[1.55] tracking-[-0.002em] text-[#3b3128]">
               {renderEmphasis(outputs.summary.desc)}
@@ -88,7 +88,7 @@ export function Outputs() {
 
                 <div className="mt-9 flex flex-col items-start gap-2">
                   <h3 className="font-display text-heading-card py-2 text-[#1c1612]">
-                    {item.title}
+                    <RevealText>{item.title}</RevealText>
                   </h3>
                   <p className="text-[13px] leading-[1.5] text-[#3b3128]">
                     {renderEmphasis(item.desc)}
@@ -118,7 +118,7 @@ export function Outputs() {
               Package completion
             </p>
             <h3 className="mt-3 font-display text-[26px] leading-[1.1] tracking-[-0.018em] text-[#1c1612] sm:text-[30px]">
-              {outputs.completion.title}
+              <RevealText>{outputs.completion.title}</RevealText>
             </h3>
           </div>
           <p className="max-w-3xl text-[14px] leading-[1.55] tracking-[-0.002em] text-[#3b3128]">

@@ -1,5 +1,5 @@
 import { FileSearch, LockKeyhole, ShieldCheck, UserRoundCheck } from "lucide-react";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { Reveal, RevealGroup, RevealItem, RevealText } from "@/components/ui/reveal";
 import { trust } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ export function TrustLayer() {
                 Trust layer
               </span>
               <h2 id="trust-heading" className="text-display-sm mt-5 text-[#f8f6f2]">
-                {trust.heading}
+                <RevealText>{trust.heading}</RevealText>
               </h2>
               <p className="mt-6 max-w-2xl text-[17px] leading-[1.5] tracking-[-0.002em] text-[#f8f6f2]/72 sm:text-[18px]">
                 {renderEmphasis(trust.body)}
@@ -65,7 +65,7 @@ export function TrustLayer() {
                   />
                   <div className="mt-10">
                     <h3 className="font-display text-[25px] leading-[1.12] tracking-[-0.015em] text-[#f8f6f2]">
-                      {p.title}
+                      <RevealText>{p.title}</RevealText>
                     </h3>
                     <p className="mt-3 text-[13px] leading-[1.5] text-[#f8f6f2]/65">
                       {renderEmphasis(p.desc)}

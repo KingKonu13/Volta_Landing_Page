@@ -1,6 +1,6 @@
 import { Database, FileText, PackageCheck, UserRoundCheck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { RevealGroup, RevealItem, RevealText } from "@/components/ui/reveal";
 import { voltaWorkflow } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 
@@ -60,7 +60,7 @@ export function VoltaWorkflow() {
                   <div className="grid gap-6 min-[1000px]:grid-cols-[minmax(0,1fr)_minmax(12rem,16rem)] min-[1000px]:gap-12">
                     <div className="max-w-3xl">
                       <h3 className="font-display text-[30px] leading-[1.08] tracking-[-0.018em] text-[#1c1612] sm:text-[34px]">
-                        {step.title}
+                        <RevealText>{step.title}</RevealText>
                       </h3>
                       <p className="mt-4 max-w-2xl text-[15px] leading-[1.55] tracking-[-0.002em] text-[#3b3128]">
                         {renderEmphasis(step.desc)}
