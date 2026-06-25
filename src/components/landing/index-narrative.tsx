@@ -146,6 +146,51 @@ function IndexRail({ active }: { active: string }) {
   );
 }
 
+/* ------------------------- mobile section indicator ------------------------- */
+
+function MobileIndexBar({ active }: { active: string }) {
+  const idx = Math.max(
+    0,
+    ENTRIES.findIndex((e) => e.id === active),
+  );
+  const current = ENTRIES[idx] ?? ENTRIES[0];
+  const progress = (idx / (ENTRIES.length - 1)) * 100;
+
+  return (
+    <nav
+      aria-label="Page index"
+      className="sticky top-0 z-30 -mx-6 flex items-center gap-3 border-b px-6 py-3 backdrop-blur md:-mx-10 md:px-10 lg:hidden"
+      style={{ backgroundColor: "rgba(244,245,246,0.82)", borderColor: C.line }}
+    >
+      <span
+        className="text-[11px] tabular-nums"
+        style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
+      >
+        {current.no}
+      </span>
+      <span
+        className="min-w-0 flex-1 truncate text-[13px] font-medium tracking-[-0.01em]"
+        style={{ color: C.ink }}
+      >
+        {current.label}
+      </span>
+      <span
+        className="shrink-0 text-[10px] uppercase tracking-[0.28em] tabular-nums"
+        style={{ fontFamily: "var(--c2-mono)", color: C.muted }}
+      >
+        {idx + 1}/{ENTRIES.length}
+      </span>
+      {/* progress underline */}
+      <span aria-hidden className="absolute inset-x-0 bottom-0 h-px" style={{ backgroundColor: C.line }} />
+      <span
+        aria-hidden
+        className="absolute bottom-0 left-0 h-px transition-[width] duration-500 ease-out"
+        style={{ width: `${progress}%`, backgroundColor: C.accent }}
+      />
+    </nav>
+  );
+}
+
 /* --------------------------------- primitives --------------------------------- */
 
 function SectionHead({
@@ -156,9 +201,9 @@ function SectionHead({
   kicker: string;
 }) {
   return (
-    <div className="mb-10 flex items-center gap-4">
+    <div className="mb-8 flex items-center gap-3 sm:gap-4 lg:mb-10">
       <span
-        className="text-[44px] leading-none tabular-nums"
+        className="text-[32px] leading-none tabular-nums sm:text-[44px]"
         style={{ fontFamily: "var(--c2-display)", color: C.line }}
       >
         {no}
@@ -293,23 +338,33 @@ function CaptureForm({
 
 /* ----------------------------------- page ----------------------------------- */
 
-export function IndexNarrative() {
+export function IndexNarrative({
+  gradientStrength = 1,
+}: {
+  gradientStrength?: number;
+} = {}) {
   const ids = ENTRIES.map((e) => e.id);
   const active = useScrollSpy(ids);
   const railRef = useRef<HTMLDivElement>(null);
 
+  // scale the ambient gradient alphas by a strength multiplier (clamped)
+  const a = (base: number) =>
+    Math.min(base * gradientStrength, 0.95).toFixed(3);
+
   return (
-    <div ref={railRef} className="relative" style={{ backgroundColor: C.bg, color: C.ink }}>
-      {/* ambient pastel gradient — fixed so it stays soft behind the content */}
+    <div ref={railRef} className="relative" style={{ color: C.ink }}>
+      {/* ambient pastel gradient — fixed full-viewport layer carrying the base
+          color so it sits above the page background but behind the content */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
+        className="pointer-events-none fixed inset-0 z-0"
         style={{
+          backgroundColor: C.bg,
           backgroundImage: `
-            radial-gradient(55rem 38rem at 88% -6%, rgba(255, 211, 165, 0.22), transparent 60%),
-            radial-gradient(52rem 40rem at 4% 94%, rgba(168, 199, 250, 0.20), transparent 58%),
-            radial-gradient(44rem 32rem at 74% 82%, rgba(255, 186, 199, 0.14), transparent 60%),
-            radial-gradient(40rem 30rem at 24% 12%, rgba(214, 232, 222, 0.16), transparent 60%)
+            radial-gradient(55rem 38rem at 88% -6%, rgba(255, 211, 165, ${a(0.22)}), transparent 60%),
+            radial-gradient(52rem 40rem at 4% 94%, rgba(168, 199, 250, ${a(0.2)}), transparent 58%),
+            radial-gradient(44rem 32rem at 74% 82%, rgba(255, 186, 199, ${a(0.14)}), transparent 60%),
+            radial-gradient(40rem 30rem at 24% 12%, rgba(214, 232, 222, ${a(0.16)}), transparent 60%)
           `,
         }}
       />
@@ -321,16 +376,19 @@ export function IndexNarrative() {
         Skip to content
       </a>
 
-      <div className="mx-auto grid w-full max-w-[88rem] grid-cols-1 gap-x-16 px-6 md:px-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:px-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-[88rem] grid-cols-1 gap-x-16 px-6 md:px-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:px-16">
         {/* LEFT INDEX RAIL */}
         <IndexRail active={active} />
 
         {/* CONTENT COLUMN */}
-        <main className="min-w-0 py-20 lg:py-0">
+        <main className="min-w-0 pb-20 lg:py-0">
+          {/* MOBILE SECTION INDICATOR (hidden on lg, where the rail takes over) */}
+          <MobileIndexBar active={active} />
+
           {/* ============================= 00 — INTRO ============================= */}
           <section
             id="intro"
-            className="flex min-h-[88vh] scroll-mt-8 flex-col justify-center"
+            className="flex min-h-[80vh] scroll-mt-16 flex-col justify-center lg:min-h-[88vh] lg:scroll-mt-8"
           >
             <Reveal>
               <p
@@ -397,7 +455,7 @@ export function IndexNarrative() {
           </section>
 
           {/* ============================ 01 — PROBLEM =========================== */}
-          <section id="problem" className="scroll-mt-8 border-t py-24 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="problem" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="01" kicker="The problem" />
             <Reveal>
               <h2
@@ -499,7 +557,7 @@ export function IndexNarrative() {
           </section>
 
           {/* =========================== 02 — WORKFLOW ========================== */}
-          <section id="volta-workflow" className="scroll-mt-8 border-t py-24 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="volta-workflow" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="02" kicker="The workflow" />
             <Reveal>
               <h2
@@ -524,7 +582,7 @@ export function IndexNarrative() {
                   >
                     <div className="flex items-start gap-4">
                       <span
-                        className="text-[52px] leading-none tabular-nums"
+                        className="text-[40px] leading-none tabular-nums sm:text-[52px]"
                         style={{ fontFamily: "var(--c2-display)", color: C.line }}
                       >
                         {card.step}
@@ -550,7 +608,7 @@ export function IndexNarrative() {
           </section>
 
           {/* ============================ 03 — OUTPUTS ========================== */}
-          <section id="outputs" className="scroll-mt-8 border-t py-24 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="outputs" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="03" kicker="What you receive" />
             <Reveal>
               <h2
@@ -635,7 +693,7 @@ export function IndexNarrative() {
           </section>
 
           {/* ============================= 04 — TRUST ========================== */}
-          <section id="trust" className="scroll-mt-8 border-t py-24 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="trust" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="04" kicker="How we keep it safe" />
             <Reveal>
               <h2
@@ -682,7 +740,7 @@ export function IndexNarrative() {
           </section>
 
           {/* ========================= 05 — EXPERT NETWORK ====================== */}
-          <section id="expert-network" className="scroll-mt-8 border-t py-24 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="expert-network" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
             <SectionHead no="05" kicker="Expert network" />
             <Reveal>
               <h2
@@ -749,13 +807,13 @@ export function IndexNarrative() {
           {/* =========================== 06 — FINAL CTA ========================= */}
           <section
             id="sponsors"
-            className="scroll-mt-8 border-t py-24 lg:py-32"
+            className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32"
             style={{ borderColor: C.line }}
           >
             <SectionHead no="06" kicker="Start a milestone" />
             <Reveal>
               <div
-                className="rounded-3xl px-8 py-16 text-center md:px-16"
+                className="rounded-3xl px-6 py-12 text-center sm:px-8 sm:py-16 md:px-16"
                 style={{ backgroundColor: C.ink }}
               >
                 <h2
