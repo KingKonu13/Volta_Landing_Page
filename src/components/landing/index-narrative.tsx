@@ -15,6 +15,7 @@ import {
 } from "@/content/site";
 import { renderEmphasis } from "@/lib/utils";
 import { OutputsSection } from "@/components/landing/outputs-section";
+import { TraceabilityAnimation } from "@/components/landing/traceability-animation";
 
 /* ------------------------------------------------------------------ *
  * Palette (cool neutral / charcoal)
@@ -91,7 +92,7 @@ function IndexRail({ active }: { active: string }) {
         className="mb-8 text-[10px] font-medium uppercase tracking-[0.34em]"
         style={{ color: C.muted, fontFamily: "var(--c2-mono)" }}
       >
-        Volta · index
+        Index
       </p>
 
       <div className="relative pl-5">
@@ -253,6 +254,45 @@ function Tag({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ----------------------------------- brand ----------------------------------- */
+
+/* Lightning bolt lifted from the Vercel favicon (src/app/icon.svg) so the
+   wordmark and the browser tab share one identity. */
+function BrandBolt({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      className={className}
+      role="img"
+      aria-label="Volta"
+    >
+      <defs>
+        <linearGradient
+          id="voltaBrandBolt"
+          x1="4"
+          y1="3"
+          x2="28"
+          y2="29"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#ff9d3c" />
+          <stop offset="0.38" stopColor="#ff5d86" />
+          <stop offset="0.72" stopColor="#3f7df0" />
+          <stop offset="1" stopColor="#22a07a" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M18.5 3 L8 17.5 H14.5 L13 29 L24 13.5 H17.5 Z"
+        fill="url(#voltaBrandBolt)"
+        stroke="#14171b"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 /* ----------------------------------- form ----------------------------------- */
 
 function CaptureForm({
@@ -356,9 +396,12 @@ function CaptureForm({
 
 export function IndexNarrative({
   gradientStrength = 1,
+  mode = "full",
 }: {
   gradientStrength?: number;
+  mode?: "full" | "sections";
 } = {}) {
+  const showChrome = mode === "full";
   const ids = ENTRIES.map((e) => e.id);
   const active = useScrollSpy(ids);
   const railRef = useRef<HTMLDivElement>(null);
@@ -373,7 +416,11 @@ export function IndexNarrative({
           color so it sits above the page background but behind the content */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0"
+        className={
+          showChrome
+            ? "pointer-events-none fixed inset-0 z-0"
+            : "pointer-events-none absolute inset-0 z-0"
+        }
         style={{
           backgroundColor: C.bg,
           backgroundImage: `
@@ -385,41 +432,62 @@ export function IndexNarrative({
         }}
       />
       <a
-        href="#intro"
+        href={showChrome ? "#intro" : "#problem"}
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:px-4 focus:py-2 focus:text-sm"
         style={{ backgroundColor: C.ink, color: C.bg }}
       >
         Skip to content
       </a>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[88rem] grid-cols-1 gap-x-16 px-6 md:px-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:px-16">
+      {showChrome && (
+        /* TOP BRANDMARK — bolt + wordmark, shared identity with the favicon */
+        <div className="relative z-10 mx-auto flex w-full max-w-[88rem] items-center gap-2 px-6 pt-6 md:px-10 lg:px-16 lg:pt-8">
+          <BrandBolt className="h-[26px] w-[26px]" />
+          <span
+            className="text-[21px] leading-none tracking-[-0.02em]"
+            style={{ fontFamily: "var(--c2-display)", color: C.ink }}
+          >
+            Volta
+          </span>
+        </div>
+      )}
+
+      <div
+        className={
+          showChrome
+            ? "relative z-10 mx-auto grid w-full max-w-[88rem] grid-cols-1 gap-x-16 px-6 md:px-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:px-16"
+            : "relative z-10 mx-auto w-full max-w-[72rem] px-6 md:px-10 lg:px-16"
+        }
+      >
         {/* LEFT INDEX RAIL */}
-        <IndexRail active={active} />
+        {showChrome && <IndexRail active={active} />}
 
         {/* CONTENT COLUMN */}
-        <main className="min-w-0 pb-20 lg:py-0">
+        <main className={showChrome ? "min-w-0 pb-20 lg:py-0" : "min-w-0 pb-20"}>
           {/* MOBILE SECTION INDICATOR (hidden on lg, where the rail takes over) */}
-          <MobileIndexBar active={active} />
+          {showChrome && <MobileIndexBar active={active} />}
 
-          {/* ============================= 00 — INTRO ============================= */}
+          {showChrome && (
+          /* ============================= 00 — INTRO ============================= */
           <section
             id="intro"
-            className="flex min-h-[80vh] scroll-mt-16 flex-col justify-center lg:min-h-[88vh] lg:scroll-mt-8"
+            className="grid min-h-[80vh] scroll-mt-16 content-center gap-10 py-16 lg:min-h-[92vh] lg:scroll-mt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-center lg:gap-10 lg:py-0 xl:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] xl:gap-14"
           >
+            <div className="flex min-w-0 flex-col" style={{ containerType: "inline-size" }}>
             <Reveal>
-              <p
-                className="text-[11px] font-medium uppercase tracking-[0.3em]"
-                style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
-              >
-                {hero.eyebrow}
-              </p>
-            </Reveal>
-            <Reveal delay={0.06}>
               <h1
-                className="mt-6 max-w-[18ch] text-[clamp(40px,6vw,76px)] leading-[0.98] tracking-[-0.03em]"
-                style={{ fontFamily: "var(--c2-display)", color: C.ink }}
+                className="leading-[1.02] tracking-[-0.03em]"
+                style={{
+                  fontFamily: "var(--c2-display)",
+                  color: C.ink,
+                  fontSize: "clamp(1rem, 7cqi, 3.25rem)",
+                }}
               >
-                {hero.headline}
+                {hero.headlineLines.map((line) => (
+                  <span key={line} className="block whitespace-nowrap">
+                    {line}
+                  </span>
+                ))}
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
@@ -468,7 +536,13 @@ export function IndexNarrative({
                 ))}
               </ul>
             </Reveal>
+            </div>
+
+            <Reveal delay={0.2} className="w-full">
+              <TraceabilityAnimation />
+            </Reveal>
           </section>
+          )}
 
           {/* ============================ 01 — PROBLEM =========================== */}
           <section id="problem" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>

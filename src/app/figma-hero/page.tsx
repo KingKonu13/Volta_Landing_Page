@@ -1,6 +1,5 @@
 import { Space_Grotesk, Spline_Sans, IBM_Plex_Mono } from "next/font/google";
 import { FigmaHero } from "@/components/landing/figma-hero";
-import { IndexNarrative } from "@/components/landing/index-narrative";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -23,7 +22,7 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
-export default function Home() {
+export default function FigmaHeroPage() {
   return (
     <div
       className={`${display.variable} ${body.variable} ${mono.variable}`}
@@ -37,7 +36,6 @@ export default function Home() {
       }
     >
       <FigmaHero />
-      <IndexNarrative gradientStrength={2.6} mode="sections" />
     </div>
   );
 }
