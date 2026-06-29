@@ -15,7 +15,8 @@ export const trustLine = "**Our AI platform drafts from your documents. Experts 
 export const hero = {
   eyebrow: "AI-native Pre-IND prep",
   headline: "You do the science. Volta handles the rest.",
-  sub: "From your **data room** to a **submission-ready Pre-IND package**. AI assembles, experts validate, you submit.",
+  headlineLines: ["You do the science.", "Volta handles the rest."],
+  sub: "From your **data room** to a **submission-ready Pre-IND package** at the speed of software. AI assembles, experts validate, you submit.",
   badges: ["Milestone-based pricing", "Expert-reviewed", "Evidence-linked", "Secure intake"],
   bullets: ["Secure data-room intake", "Expert review", "Evidence-linked record"],
 } as const;
