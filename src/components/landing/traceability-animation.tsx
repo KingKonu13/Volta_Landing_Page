@@ -6,23 +6,27 @@ import { FileText } from "lucide-react";
 
 /* Palette mirrors the cool-neutral system used across the landing page. */
 const C = {
-  bg: "#f4f5f6",
-  surface: "#e9ebec",
-  line: "#d3d7db",
-  muted: "#6a7079",
-  soft: "#2c3138",
-  ink: "#14171b",
-  accent: "#4d6470",
+  bg: "#f6fafc",
+  surface: "#eaf3f8",
+  line: "rgba(8,35,63,0.12)",
+  muted: "#5e7184",
+  soft: "#243b53",
+  ink: "#08233f",
+  accent: "#2f80ed",
+  blue: "#2477d4",
+  cyan: "#6ed3f7",
+  teal: "#16a394",
+  mint: "#dff7f1",
   paper: "#ffffff",
 };
 
 /* Bolt gradient — same stops as the favicon, reused for the trace line. */
 const BOLT_STOPS = (
   <>
-    <stop offset="0" stopColor="#ff9d3c" />
-    <stop offset="0.4" stopColor="#ff5d86" />
-    <stop offset="0.72" stopColor="#3f7df0" />
-    <stop offset="1" stopColor="#22a07a" />
+    <stop offset="0" stopColor="#6ed3f7" />
+    <stop offset="0.42" stopColor="#2477d4" />
+    <stop offset="0.74" stopColor="#2f80ed" />
+    <stop offset="1" stopColor="#16a394" />
   </>
 );
 
@@ -45,7 +49,7 @@ const FILES: { name: string; meta: string; source?: boolean }[] = [
   { name: "PK / PD Analysis.xlsx", meta: "Study VTX-PK-002" },
 ];
 
-const CLAIM_INDEX = LINES.findIndex((l) => l.claim);
+const COMPLETE_LENS = LINES.map((l) => l.t.length);
 
 type Coords = { x1: number; y1: number; x2: number; y2: number };
 
@@ -90,9 +94,10 @@ function StatusPill({ traced }: { traced: boolean }) {
       className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em]"
       style={{
         fontFamily: "var(--c2-mono)",
-        borderColor: C.line,
+        borderColor: "rgba(255,255,255,0.44)",
         color: traced ? C.ink : C.muted,
-        backgroundColor: C.bg,
+        backgroundColor: "rgba(255,255,255,0.52)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.62)",
       }}
     >
       {traced ? (
@@ -101,7 +106,7 @@ function StatusPill({ traced }: { traced: boolean }) {
             <path
               d="M2.5 6.2 L5 8.6 L9.6 3.6"
               fill="none"
-              stroke="#22a07a"
+              stroke={C.teal}
               strokeWidth="1.7"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -113,7 +118,7 @@ function StatusPill({ traced }: { traced: boolean }) {
         <>
           <motion.span
             className="h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: "#ff5d86" }}
+            style={{ backgroundColor: C.blue }}
             animate={{ opacity: [1, 0.3, 1], scale: [1, 0.8, 1] }}
             transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -142,13 +147,7 @@ export function TraceabilityAnimation() {
 
   /* sequence driver */
   useEffect(() => {
-    if (reduce) {
-      setTitleLen(TITLE.length);
-      setLens(LINES.map((l) => l.t.length));
-      setClaimActive(true);
-      setTraced(true);
-      return;
-    }
+    if (reduce) return;
 
     let cancelled = false;
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -202,12 +201,14 @@ export function TraceabilityAnimation() {
     };
   }, [runId, reduce]);
 
+  const displayTitleLen = reduce ? TITLE.length : titleLen;
+  const displayLens = reduce ? COMPLETE_LENS : lens;
+  const displayClaimActive = reduce || claimActive;
+  const displayTraced = reduce || traced;
+
   /* measure the connector endpoints once the trace fires */
   useEffect(() => {
-    if (!traced) {
-      setCoords(null);
-      return;
-    }
+    if (!displayTraced) return;
     let raf = 0;
     let tries = 0;
     const measure = () => {
@@ -239,10 +240,10 @@ export function TraceabilityAnimation() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", measure);
     };
-  }, [traced, runId]);
+  }, [displayTraced, runId]);
 
-  const titleTyping = titleLen < TITLE.length;
-  const activeLine = lens.findIndex((n, i) => n < LINES[i].t.length);
+  const titleTyping = displayTitleLen < TITLE.length;
+  const activeLine = displayLens.findIndex((n, i) => n < LINES[i].t.length);
 
   const midY = coords ? (coords.y1 + coords.y2) / 2 : 0;
 
@@ -251,9 +252,12 @@ export function TraceabilityAnimation() {
       ref={panelRef}
       className="relative w-full overflow-hidden rounded-2xl border p-4 sm:p-5"
       style={{
-        borderColor: C.line,
-        backgroundColor: C.surface,
-        boxShadow: "0 24px 60px -38px rgba(20,23,27,0.5)",
+        borderColor: "rgba(255,255,255,0.42)",
+        background:
+          "linear-gradient(145deg, rgba(255,255,255,0.74), rgba(223,247,241,0.34), rgba(234,243,248,0.46))",
+        boxShadow:
+          "inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -24px 60px rgba(110,211,247,0.14), 0 2px 6px rgba(8,35,63,0.06), 0 24px 50px -24px rgba(8,35,63,0.4), 0 50px 100px -44px rgba(8,35,63,0.55)",
+        backdropFilter: "blur(18px)",
       }}
     >
       {/* header */}
@@ -264,41 +268,46 @@ export function TraceabilityAnimation() {
         >
           Pre-IND draft
         </span>
-        <StatusPill traced={traced} />
+        <StatusPill traced={displayTraced} />
       </div>
 
       {/* document / paper */}
       <div
         className="relative z-10 rounded-xl border p-4"
-        style={{ borderColor: C.line, backgroundColor: C.paper }}
+        style={{
+          borderColor: "rgba(255,255,255,0.46)",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.62))",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.84)",
+        }}
       >
         <p
           className="min-h-[1.2em] text-[15px] font-medium tracking-[-0.01em]"
           style={{ fontFamily: "var(--c2-display)", color: C.ink }}
         >
-          {TITLE.slice(0, titleLen)}
+          {TITLE.slice(0, displayTitleLen)}
           {titleTyping && <Caret />}
         </p>
 
         <div className="mt-3 flex flex-col gap-2">
           {LINES.map((l, i) => {
             const isClaim = Boolean(l.claim);
-            const lit = isClaim && claimActive;
+            const lit = isClaim && displayClaimActive;
             return (
               <p
                 key={i}
                 className="min-h-[1.2em] rounded-md text-[12.5px] leading-[1.55] transition-colors duration-300"
                 style={{
                   color: isClaim && lit ? C.ink : C.soft,
-                  backgroundColor: lit ? "rgba(63,125,240,0.10)" : "transparent",
+                  backgroundColor: lit ? "rgba(110,211,247,0.16)" : "transparent",
                   boxShadow: lit ? `inset 2px 0 0 ${C.accent}` : "none",
                   padding: lit ? "4px 8px" : "0",
                   marginLeft: lit ? "-8px" : "0",
                   marginRight: lit ? "-8px" : "0",
                 }}
               >
-                {l.t.slice(0, lens[i])}
-                {isClaim && <CiteChip ref={claimChipRef} show={traced} />}
+                {l.t.slice(0, displayLens[i])}
+                {isClaim && <CiteChip ref={claimChipRef} show={displayTraced} />}
                 {!titleTyping && activeLine === i && <Caret />}
               </p>
             );
@@ -309,7 +318,12 @@ export function TraceabilityAnimation() {
       {/* data room */}
       <div
         className="relative z-10 mt-4 rounded-xl border p-3"
-        style={{ borderColor: C.line, backgroundColor: C.bg }}
+        style={{
+          borderColor: "rgba(255,255,255,0.38)",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.54), rgba(246,249,252,0.42))",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.6)",
+        }}
       >
         <p
           className="mb-2 text-[10px] font-medium uppercase tracking-[0.22em]"
@@ -319,14 +333,14 @@ export function TraceabilityAnimation() {
         </p>
         <div className="flex flex-col gap-1.5">
           {FILES.map((f) => {
-            const lit = Boolean(f.source) && traced;
+            const lit = Boolean(f.source) && displayTraced;
             return (
               <div
                 key={f.name}
                 className="flex items-center gap-2.5 rounded-lg border px-2.5 py-2 transition-colors duration-300"
                 style={{
-                  borderColor: lit ? C.accent : "transparent",
-                  backgroundColor: lit ? C.paper : "transparent",
+                  borderColor: lit ? "rgba(47,128,237,0.24)" : "rgba(255,255,255,0.12)",
+                  backgroundColor: lit ? "rgba(255,255,255,0.68)" : "rgba(255,255,255,0.18)",
                 }}
               >
                 <FileText
@@ -342,7 +356,7 @@ export function TraceabilityAnimation() {
                   {f.name}
                 </span>
                 {f.source ? (
-                  <CiteChip ref={fileChipRef} show={traced} />
+                  <CiteChip ref={fileChipRef} show={displayTraced} />
                 ) : null}
                 <span
                   className="hidden shrink-0 text-right text-[10px] sm:inline"
@@ -366,7 +380,7 @@ export function TraceabilityAnimation() {
             {BOLT_STOPS}
           </linearGradient>
         </defs>
-        {coords && (
+        {displayTraced && coords && (
           <>
             <motion.path
               key={runId}
@@ -390,7 +404,7 @@ export function TraceabilityAnimation() {
             />
             <motion.circle
               r={3}
-              fill="#22a07a"
+              fill={C.teal}
               cx={coords.x2}
               cy={coords.y2}
               initial={{ scale: 0, opacity: 0 }}

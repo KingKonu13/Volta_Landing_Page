@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem, RevealText } from "@/components/ui/reveal";
 import { ContactForm } from "@/components/ui/contact-form";
-import { expertNetwork, cta } from "@/content/site";
+import { expertNetwork } from "@/content/site";
 
 export function ExpertNetwork() {
   return (

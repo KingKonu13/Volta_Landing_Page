@@ -202,7 +202,7 @@ function SectionHead({
   kicker: string;
 }) {
   return (
-    <div className="mb-8 flex items-center gap-3 sm:gap-4 lg:mb-10">
+    <div className="mb-6 flex items-center gap-3 sm:gap-4 lg:mb-8">
       <span
         className="text-[32px] leading-none tabular-nums sm:text-[44px]"
         style={{ fontFamily: "var(--c2-display)", color: C.line }}
@@ -463,7 +463,7 @@ export function IndexNarrative({
         {showChrome && <IndexRail active={active} />}
 
         {/* CONTENT COLUMN */}
-        <main className={showChrome ? "min-w-0 pb-20 lg:py-0" : "min-w-0 pb-20"}>
+        <main className={showChrome ? "min-w-0 pb-14 lg:py-0" : "min-w-0 pb-14"}>
           {/* MOBILE SECTION INDICATOR (hidden on lg, where the rail takes over) */}
           {showChrome && <MobileIndexBar active={active} />}
 
@@ -500,7 +500,7 @@ export function IndexNarrative({
             </Reveal>
 
             <Reveal delay={0.18}>
-              <div className="mt-10 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href={cta.primary.href}
                   className="inline-flex items-center rounded-full px-6 py-3 text-[14px] font-medium transition-opacity hover:opacity-90"
@@ -519,7 +519,7 @@ export function IndexNarrative({
             </Reveal>
 
             <Reveal delay={0.24}>
-              <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3">
+              <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
                 {hero.badges.map((b) => (
                   <li
                     key={b}
@@ -545,7 +545,7 @@ export function IndexNarrative({
           )}
 
           {/* ============================ 01 — PROBLEM =========================== */}
-          <section id="problem" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="problem" className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20" style={{ borderColor: C.line }}>
             <SectionHead no="01" kicker="The problem" />
             <Reveal>
               <h2
@@ -556,14 +556,14 @@ export function IndexNarrative({
               </h2>
             </Reveal>
             <Reveal delay={0.06}>
-              <p className="mt-6 max-w-[58ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
+              <p className="mt-4 max-w-[58ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
                 {renderEmphasis(problem.intro)}
               </p>
             </Reveal>
 
             <Reveal delay={0.1}>
               <div
-                className="mt-12 rounded-2xl border p-7"
+                className="mt-8 rounded-2xl border p-7"
                 style={{ borderColor: C.line, backgroundColor: C.surface }}
               >
                 <p
@@ -584,7 +584,7 @@ export function IndexNarrative({
               </div>
             </Reveal>
 
-            <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border md:grid-cols-3" style={{ borderColor: C.line, backgroundColor: C.line }}>
+            <ol className="mt-8 grid gap-px overflow-hidden rounded-2xl border md:grid-cols-3" style={{ borderColor: C.line, backgroundColor: C.line }}>
               {problem.points.map((pt, i) => (
                 <li key={pt.title} style={{ backgroundColor: C.bg }}>
                   <Reveal delay={i * 0.06} className="h-full p-6">
@@ -606,7 +606,7 @@ export function IndexNarrative({
             </ol>
 
             <Reveal delay={0.1}>
-              <div className="mt-10">
+              <div className="mt-8">
                 <p
                   className="text-[10px] font-medium uppercase tracking-[0.3em]"
                   style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
@@ -619,7 +619,7 @@ export function IndexNarrative({
                 >
                   {problem.resolution.title}
                 </p>
-                <div className="mt-8 grid gap-8 sm:grid-cols-2">
+                <div className="mt-6 grid gap-6 sm:grid-cols-2">
                   {problem.resolution.steps.map((s, i) => (
                     <Reveal key={s.title} delay={i * 0.05} className="flex gap-4">
                       <span
@@ -639,7 +639,7 @@ export function IndexNarrative({
                     </Reveal>
                   ))}
                 </div>
-                <p className="mt-8 max-w-[60ch] text-[14px] italic leading-[1.6]" style={{ color: C.muted }}>
+                <p className="mt-6 max-w-[60ch] text-[14px] italic leading-[1.6]" style={{ color: C.muted }}>
                   {problem.resolution.note}
                 </p>
               </div>
@@ -647,7 +647,7 @@ export function IndexNarrative({
           </section>
 
           {/* =========================== 02 — WORKFLOW ========================== */}
-          <section id="volta-workflow" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="volta-workflow" className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20" style={{ borderColor: C.line }}>
             <SectionHead no="02" kicker="The workflow" />
             <Reveal>
               <h2
@@ -658,16 +658,16 @@ export function IndexNarrative({
               </h2>
             </Reveal>
             <Reveal delay={0.06}>
-              <p className="mt-6 max-w-[56ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
+              <p className="mt-4 max-w-[56ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
                 {voltaWorkflow.intro}
               </p>
             </Reveal>
 
-            <div className="mt-12 flex flex-col">
+            <div className="mt-8 flex flex-col">
               {voltaWorkflow.cards.map((card, i) => (
                 <Reveal key={card.step} delay={i * 0.05}>
                   <div
-                    className="grid grid-cols-1 gap-6 border-t py-8 md:grid-cols-[8rem_minmax(0,1fr)]"
+                    className="grid grid-cols-1 gap-5 border-t py-6 md:grid-cols-[8rem_minmax(0,1fr)]"
                     style={{ borderColor: C.line }}
                   >
                     <div className="flex items-start gap-4">
@@ -682,10 +682,10 @@ export function IndexNarrative({
                       <h3 className="text-[20px] font-medium tracking-[-0.015em]" style={{ color: C.ink }}>
                         {card.title}
                       </h3>
-                      <p className="mt-3 max-w-[58ch] text-[15px] leading-[1.6]" style={{ color: C.soft }}>
+                      <p className="mt-2 max-w-[58ch] text-[15px] leading-[1.6]" style={{ color: C.soft }}>
                         {renderEmphasis(card.desc)}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-2">
+                      <div className="mt-4 flex flex-wrap gap-2">
                         {card.tags.map((t) => (
                           <Tag key={t}>{t}</Tag>
                         ))}
@@ -698,13 +698,13 @@ export function IndexNarrative({
           </section>
 
           {/* ============================ 03 — OUTPUTS ========================== */}
-          <section id="outputs" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="outputs" className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20" style={{ borderColor: C.line }}>
             <SectionHead no="03" kicker="What you receive" />
             <OutputsSection />
           </section>
 
           {/* ============================= 04 — TRUST ========================== */}
-          <section id="trust" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="trust" className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20" style={{ borderColor: C.line }}>
             <SectionHead no="04" kicker="How we keep it safe" />
             <Reveal>
               <h2
@@ -715,7 +715,7 @@ export function IndexNarrative({
               </h2>
             </Reveal>
             <Reveal delay={0.06}>
-              <p className="mt-6 max-w-[56ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
+              <p className="mt-4 max-w-[56ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
                 {renderEmphasis(trust.sub)}
               </p>
             </Reveal>
@@ -725,7 +725,7 @@ export function IndexNarrative({
               </p>
             </Reveal>
 
-            <div className="mt-12 grid gap-8 md:grid-cols-3">
+            <div className="mt-8 grid gap-8 md:grid-cols-3">
               {trust.pillars.map((p, i) => (
                 <Reveal key={p.title} delay={i * 0.06}>
                   <div className="border-t pt-5" style={{ borderColor: C.accent }}>
@@ -742,7 +742,7 @@ export function IndexNarrative({
 
             <Reveal delay={0.1}>
               <p
-                className="mt-12 max-w-[64ch] text-[15px] leading-[1.7]"
+                className="mt-8 max-w-[64ch] text-[15px] leading-[1.7]"
                 style={{ color: C.soft }}
               >
                 {renderEmphasis(trustLine)}
@@ -751,7 +751,7 @@ export function IndexNarrative({
           </section>
 
           {/* ========================= 05 — EXPERT NETWORK ====================== */}
-          <section id="expert-network" className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32" style={{ borderColor: C.line }}>
+          <section id="expert-network" className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20" style={{ borderColor: C.line }}>
             <SectionHead no="05" kicker="Expert network" />
             <Reveal>
               <h2
@@ -762,13 +762,13 @@ export function IndexNarrative({
               </h2>
             </Reveal>
             <Reveal delay={0.06}>
-              <p className="mt-6 max-w-[58ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
+              <p className="mt-4 max-w-[58ch] text-[17px] leading-[1.6]" style={{ color: C.soft }}>
                 {renderEmphasis(expertNetwork.intro)}
               </p>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <ul className="mt-10 flex flex-wrap gap-2.5">
+              <ul className="mt-8 flex flex-wrap gap-2.5">
                 {expertNetwork.domains.map((d) => (
                   <li
                     key={d}
@@ -781,10 +781,10 @@ export function IndexNarrative({
               </ul>
             </Reveal>
 
-            <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-3" style={{ borderColor: C.line, backgroundColor: C.line }}>
+            <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-3" style={{ borderColor: C.line, backgroundColor: C.line }}>
               {expertNetwork.stats.map((s, i) => (
                 <div key={s.value} style={{ backgroundColor: C.bg }}>
-                  <Reveal delay={i * 0.06} className="p-7">
+                  <Reveal delay={i * 0.06} className="p-5">
                     <p
                       className="text-[28px] leading-none tracking-[-0.02em]"
                       style={{ fontFamily: "var(--c2-display)", color: C.ink }}
@@ -800,7 +800,7 @@ export function IndexNarrative({
             </div>
 
             <Reveal delay={0.08}>
-              <div className="mt-12 max-w-[480px]">
+              <div className="mt-8 max-w-[480px]">
                 <p
                   className="text-[10px] font-medium uppercase tracking-[0.3em]"
                   style={{ fontFamily: "var(--c2-mono)", color: C.accent }}
@@ -818,13 +818,13 @@ export function IndexNarrative({
           {/* =========================== 06 — FINAL CTA ========================= */}
           <section
             id="sponsors"
-            className="scroll-mt-16 border-t py-16 sm:py-24 lg:scroll-mt-8 lg:py-32"
+            className="scroll-mt-16 border-t py-12 sm:py-16 lg:scroll-mt-8 lg:py-20"
             style={{ borderColor: C.line }}
           >
             <SectionHead no="06" kicker="Start a milestone" />
             <Reveal>
               <div
-                className="rounded-3xl px-6 py-12 text-center sm:px-8 sm:py-16 md:px-16"
+                className="rounded-3xl px-6 py-8 text-center sm:px-8 sm:py-10 md:px-12"
                 style={{ backgroundColor: C.ink }}
               >
                 <h2
@@ -834,18 +834,18 @@ export function IndexNarrative({
                   {finalCta.heading}
                 </h2>
                 <p
-                  className="mx-auto mt-6 max-w-[54ch] text-[17px] leading-[1.6]"
+                  className="mx-auto mt-4 max-w-[54ch] text-[17px] leading-[1.6]"
                   style={{ color: "#aeb4bb" }}
                 >
                   {renderEmphasis(finalCta.sub)}
                 </p>
-                <div className="mt-10 flex justify-center">
+                <div className="mt-6 flex justify-center">
                   <CaptureForm type="sponsors" dark />
                 </div>
               </div>
             </Reveal>
 
-            <footer className="mt-12 flex flex-col items-start justify-between gap-3 border-t pt-8 sm:flex-row sm:items-center" style={{ borderColor: C.line }}>
+            <footer className="mt-8 flex flex-col items-start justify-between gap-3 border-t pt-8 sm:flex-row sm:items-center" style={{ borderColor: C.line }}>
               <p className="text-[13px]" style={{ color: C.muted }}>
                 Volta — AI-native Pre-IND meeting prep
               </p>

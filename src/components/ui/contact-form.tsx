@@ -52,7 +52,7 @@ export function ContactForm({ type, inverted = false, className }: ContactFormPr
     return (
       <div className={cn("text-center", className)}>
         <p className={inverted ? "text-[#f8f6f2]" : "text-[#1c1612]"}>
-          We'll reach out to you soon.
+          We&apos;ll reach out to you soon.
         </p>
       </div>
     );

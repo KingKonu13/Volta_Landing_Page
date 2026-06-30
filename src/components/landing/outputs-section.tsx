@@ -81,7 +81,7 @@ const iconVariants: Variants = {
   },
 };
 
-function OutputCard({ item, index }: { item: (typeof outputs.items)[number]; index: number }) {
+function OutputCard({ item }: { item: (typeof outputs.items)[number] }) {
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const Icon = ICONS[item.title] ?? FileText;
@@ -94,7 +94,7 @@ function OutputCard({ item, index }: { item: (typeof outputs.items)[number]; ind
       onFocusCapture={() => setHovered(true)}
       onBlurCapture={() => setHovered(false)}
       tabIndex={0}
-      className="group relative isolate overflow-hidden rounded-2xl border p-6 outline-none"
+      className="group relative isolate overflow-hidden rounded-2xl border p-5 outline-none"
       style={{ borderColor: hovered ? C.accent : C.line, backgroundColor: C.bg }}
       animate={
         reduce
@@ -166,7 +166,7 @@ function OutputCard({ item, index }: { item: (typeof outputs.items)[number]; ind
 
       {/* "Get in touch" link — revealed on hover/focus (datacurve-style) */}
       <motion.div
-        className="mt-5"
+        className="mt-3"
         initial={false}
         animate={
           reduce ? undefined : { opacity: hovered ? 1 : 0, y: hovered ? 0 : 6 }
@@ -211,7 +211,7 @@ export function OutputsSection() {
       </motion.h2>
 
       <motion.p
-        className="mt-6 max-w-[56ch] text-[17px] leading-[1.6]"
+        className="mt-4 max-w-[56ch] text-[17px] leading-[1.6]"
         style={{ color: C.soft }}
         initial={reduce ? false : { opacity: 0, y: 18 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -223,7 +223,7 @@ export function OutputsSection() {
 
       {/* Summary panel */}
       <motion.div
-        className="mt-12 rounded-2xl border p-7"
+        className="mt-8 rounded-2xl border p-5 sm:p-6"
         style={{ borderColor: C.line, backgroundColor: C.surface }}
         initial={reduce ? false : { opacity: 0, y: 18 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -237,15 +237,15 @@ export function OutputsSection() {
           {outputs.summary.label}
         </p>
         <p
-          className="mt-4 max-w-[40ch] text-[22px] leading-[1.25] tracking-[-0.015em]"
+          className="mt-3 max-w-[40ch] text-[22px] leading-[1.25] tracking-[-0.015em]"
           style={{ fontFamily: "var(--c2-display)", color: C.ink }}
         >
           {outputs.summary.title}
         </p>
-        <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.6]" style={{ color: C.muted }}>
+        <p className="mt-3 max-w-[60ch] text-[15px] leading-[1.6]" style={{ color: C.muted }}>
           {renderEmphasis(outputs.summary.desc)}
         </p>
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <ul className="mt-4 flex flex-wrap gap-2">
           {outputs.summary.checks.map((c) => (
             <Tag key={c}>{c}</Tag>
           ))}
@@ -254,20 +254,20 @@ export function OutputsSection() {
 
       {/* The 6 animated item cards — stagger in, pop & sweep on hover */}
       <motion.div
-        className="mt-8 grid gap-4 sm:grid-cols-2"
+        className="mt-6 grid gap-4 sm:grid-cols-2"
         variants={gridVariants}
         initial={reduce ? false : "hidden"}
         whileInView={reduce ? undefined : "show"}
         viewport={{ once: true, margin: "-60px" }}
       >
-        {outputs.items.map((item, i) => (
-          <OutputCard key={item.title} item={item} index={i} />
+        {outputs.items.map((item) => (
+          <OutputCard key={item.title} item={item} />
         ))}
       </motion.div>
 
       {/* Dark pricing panel */}
       <motion.div
-        className="mt-8 rounded-2xl px-7 py-8 sm:px-8"
+        className="mt-6 rounded-2xl px-6 py-6 sm:px-7"
         style={{ backgroundColor: C.ink }}
         initial={reduce ? false : { opacity: 0, y: 18 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -281,19 +281,19 @@ export function OutputsSection() {
           {outputs.pricing.label}
         </p>
         <p
-          className="mt-4 max-w-[28ch] text-[22px] leading-[1.2] tracking-[-0.015em]"
+          className="mt-3 max-w-[28ch] text-[22px] leading-[1.2] tracking-[-0.015em]"
           style={{ fontFamily: "var(--c2-display)", color: C.bg }}
         >
           {outputs.pricing.title}
         </p>
-        <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.6]" style={{ color: "#c7ccd2" }}>
+        <p className="mt-3 max-w-[62ch] text-[15px] leading-[1.6]" style={{ color: "#c7ccd2" }}>
           {renderEmphasis(outputs.pricing.desc)}
         </p>
       </motion.div>
 
       {/* Completion note */}
       <motion.div
-        className="mt-8 flex gap-4 border-l-2 pl-5"
+        className="mt-6 flex gap-4 border-l-2 pl-5"
         style={{ borderColor: C.accent }}
         initial={reduce ? false : { opacity: 0, y: 18 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
